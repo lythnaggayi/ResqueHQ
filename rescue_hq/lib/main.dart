@@ -30,7 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(141, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(141, 255, 255, 255),
         title: Row(
@@ -78,7 +77,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]),
               )
             : Container(
-                color: Colors.blue,
+                child: Column(
+                  children: [
+                    const Padding(padding: EdgeInsets.all(10.0)),
+                    const Text(
+                      "Possible First Aid Options",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    ExpansionTile(
+                      title: const Text('Leg or Arm Fracture'),
+                      children: const <Widget>[
+                        ListTile(
+                          title: Text(
+                              "Stop any bleeding. Apply pressure to the wound with a sterile bandage, a clean cloth or a clean piece of clothing. \n\nImmobilize the injured area. Do not try to realign the bone or push a bone that's sticking out back in. If you've been trained in how to splint and professional help isn't readily available, apply a splint to the area above and below the fracture sites. Padding the splints can help reduce discomfort. \n\nApply ice packs to limit swelling and help relieve pain. Don't apply ice directly to the skin. Wrap the ice in a towel, piece of cloth or some other material. \n\nTreat for shock. If the person feels faint or is breathing in short, rapid breaths, lay the person down with the head slightly lower than the trunk and, if possible, elevate the legs."),
+                        ),
+                      ],
+                      onExpansionChanged: (bool expanded) {},
+                    ),
+                  ],
+                ),
               ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -88,9 +106,9 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.health_and_safety),
           ),
           BottomNavigationBarItem(
-            label: 'Emergency',
-            icon: Icon(Icons.emergency),
-          ),
+            label: 'First Aid',
+            icon: Icon(Icons.local_hospital),
+          )
         ],
         currentIndex: _currentIndex,
         onTap: (int index) {

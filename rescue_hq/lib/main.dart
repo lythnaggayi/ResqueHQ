@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 
+class DatItem {
+  String? id;
+  String? dataText;
+
+  DatItem({required this.id, required this.dataText});
+
+  static List<DatItem> datalist() {
+    return [
+      DatItem(id: '01', dataText: 'Hospital'),
+      DatItem(id: '02', dataText: 'Emergency'),
+      DatItem(id: '03', dataText: 'Burn Centre'),
+      DatItem(id: '04', dataText: 'Accident'),
+      DatItem(id: '05', dataText: 'Brealthlessness'),
+      DatItem(id: '06', dataText: 'Unconsciousness'),
+    ];
+  }
+}
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final dataslist = DatItem.datalist();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,8 +48,36 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// List<DatItem> _searchItem = [];
+
 class _MyHomePageState extends State<MyHomePage> {
+  List<DatItem> _searchItem = [];
+  final dataslist = DatItem.datalist();
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    _searchItem = dataslist;
+    super.initState();
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<DatItem> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = dataslist;
+    } else {
+      results = dataslist
+          .where((item) => item.dataText!
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    setState(() {
+      _searchItem = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,19 +100,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
-        child: _currentIndex == 0
+        child: _currentIndex == 2
             ? Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 color: const Color.fromARGB(141, 255, 255, 255),
                 child: Column(children: [
+                  // searchBox(),
                   Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                    ),
                     height: 44,
                     width: 620,
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 219, 219, 219),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        border:
+                            Border.all(width: 1, color: Colors.grey.shade400)),
+                    child: TextField(
+                      onChanged: (enteredKeyword) => _runFilter(enteredKeyword),
+                      decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(0),
                           prefixIcon: Icon(
                             Icons.search,
@@ -75,6 +131,25 @@ class _MyHomePageState extends State<MyHomePage> {
                           border: InputBorder.none,
                           hintText: 'Search',
                           hintStyle: TextStyle(color: Colors.grey)),
+                    ),
+                  ),
+
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 25, bottom: 20),
+                          child: const Text(
+                            'Speed dial a specific service ',
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        for (DatItem dataitem in _searchItem)
+                          Hitem(
+                            dataitem: dataitem,
+                          ),
+                      ],
                     ),
                   )
                 ]),
@@ -93,6 +168,10 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Emergency',
             icon: Icon(Icons.emergency),
           ),
+          BottomNavigationBarItem(
+            label: 'Speed Dial',
+            icon: Icon(Icons.speed),
+          ),
         ],
         currentIndex: _currentIndex,
         onTap: (int index) {
@@ -101,6 +180,49 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
       ),
+    );
+  }
+}
+
+class Hitem extends StatelessWidget {
+  final DatItem dataitem;
+  Hitem({Key? key, required this.dataitem}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          height: 53,
+          width: 350,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 1, color: Colors.grey.shade400)),
+            child: ListTile(
+              onTap: () {},
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(11)),
+              tileColor: Colors.transparent,
+              leading: const Icon(
+                Icons.phone,
+                color: Colors.black,
+              ),
+              title: Text(
+                dataitem.dataText!,
+                style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800
+                    // decoration: TextDecoration.lineThrough,
+                    ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

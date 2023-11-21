@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+//this makes the button on the home page appear like a wave
+
 class WaveAnimation extends StatefulWidget {
   const WaveAnimation({
     super.key,

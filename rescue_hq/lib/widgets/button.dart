@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//this is the big round button on the home page
 class Button extends StatelessWidget {
   const Button({super.key});
 

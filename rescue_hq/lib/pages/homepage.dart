@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // ignore: unused_field
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +31,6 @@ class _HomePageState extends State<HomePage> {
                   ))
             ]))
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: 'Medical',
-            icon: Icon(Icons.medical_services_outlined),
-          ),
-        ],
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
     );
   }
 }

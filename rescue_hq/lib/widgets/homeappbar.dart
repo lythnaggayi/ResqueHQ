@@ -1,6 +1,6 @@
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
+//this is the  appbar
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
@@ -9,10 +9,10 @@ class HomeAppBar extends StatelessWidget {
     return Container(
       color: Colors.yellow,
       padding: const EdgeInsets.all(25.0),
-      child: Row(
+      child: const Row(
         children: [
-          const Icon(Icons.sort, size: 30.0, color: Color(0xFFFFFFFF)),
-          const Padding(
+          Icon(Icons.sort, size: 30.0, color: Color(0xFFFFFFFF)),
+          Padding(
               padding: EdgeInsets.only(
                 left: 20,
               ),
@@ -22,24 +22,13 @@ class HomeAppBar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFFFFFFF),
                   ))),
-          const Spacer(),
-          badges.Badge(
-              badgeStyle: const badges.BadgeStyle(
-                badgeColor: Colors.red,
-                padding: EdgeInsets.all(7.0),
-              ),
-              badgeContent: const Text(
-                "3",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, "cartPage");
-                  },
-                  child: const Icon(Icons.shopping_bag_outlined,
-                      size: 32.0, color: Color(0xFF4C53A5))))
+          // const Spacer(),
+          // InkWell(
+          //     onTap: () {
+          //       Navigator.pushNamed(context, "cartPage");
+          //     },
+          //     child: const Icon(Icons.contacts,
+          //         size: 32.0, color: Color(0xFF4C53A5)))
         ],
       ),
     );

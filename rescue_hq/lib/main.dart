@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rescue_hq/pages/homepage.dart';
+import 'package:rescue_hq/pages/possible_first_aid.dart';
+import 'package:rescue_hq/widgets/homeappbar.dart';
 
 class DatItem {
   String? id;
@@ -35,9 +37,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      routes: {
-        "/": (context) => const HomePage(),
-      },
+      home: const MyHomePage(
+        title: '',
+      ),
+      //routes: {
+      //  "/": (context) => const HomePage(),
+      // },
     );
   }
 }
@@ -82,29 +87,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(141, 255, 255, 255),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Icon(Icons.menu),
-            SizedBox(
-              height: 40,
-              width: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset('images/user.png'),
-              ),
-            )
-          ],
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: const Color.fromARGB(141, 255, 255, 255),
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       const Icon(Icons.menu),
+      //       SizedBox(
+      //         height: 40,
+      //         width: 40,
+      //         child: ClipRRect(
+      //           borderRadius: BorderRadius.circular(20),
+      //           child: Image.asset('images/user.png'),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // ),
       body: Center(
           child: _currentIndex == 2
               ? Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   color: const Color.fromARGB(141, 255, 255, 255),
                   child: Column(children: [
+                    const HomeAppBar(),
                     // searchBox(),
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -134,7 +139,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             hintStyle: TextStyle(color: Colors.grey)),
                       ),
                     ),
-
                     Expanded(
                       child: ListView(
                         children: [
@@ -179,47 +183,46 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     )
                   : _currentIndex == 1
-                      ? Container(
-                          child: Text('Contacts page(adding soon)'),
-                        )
-                      // Put here code for home page
-                      : Container(
-                          child: Text('Home page(feel free to change icon)'),
-                        )),
+                      ? const Accordion() //first aid options page
+                      : const HomePage()), //the home page
       bottomNavigationBar: BottomNavigationBar(
-        selectedLabelStyle:
-            TextStyle(color: Colors.blue), // Change color for selected item
-        unselectedLabelStyle: TextStyle(color: Colors.grey),
-        backgroundColor: Colors.purple,
+        selectedLabelStyle: const TextStyle(
+            color: Colors.white), // Change color for selected item
+        unselectedLabelStyle: const TextStyle(color: Colors.grey),
+        backgroundColor: const Color(0xFFFFD600),
         items: const [
           BottomNavigationBarItem(
-            label: 'Health',
+            label: 'Home',
             icon: Icon(
-              Icons.health_and_safety,
-              color: Colors.black,
+              Icons.home,
+              color: Colors.white,
+              size: 30.0,
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Contacts',
+            label: 'Help',
             icon: Icon(
-              Icons.contact_page_sharp,
-              color: Colors.black,
+              Icons.medical_services_outlined,
+              color: Colors.white,
+              size: 30.0,
             ),
           ),
           BottomNavigationBarItem(
             label: 'Speed Dial',
             icon: Icon(
               Icons.speed,
-              color: Colors.black,
+              color: Colors.white,
+              size: 30.0,
             ),
           ),
-          BottomNavigationBarItem(
-            label: 'First Aid',
-            icon: Icon(
-              Icons.local_hospital,
-              color: Colors.black,
-            ),
-          )
+          // BottomNavigationBarItem(
+          //   label: 'First Aid',
+          //   icon: Icon(
+          //     Icons.local_hospital,
+          //     color: Colors.white,
+          //     size: 30.0,
+          //   ),
+          // )
         ],
         currentIndex: _currentIndex,
         onTap: (int index) {

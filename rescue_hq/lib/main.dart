@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rescue_hq/pages/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Resque HQ',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: const MyHomePage(title: ''),
+      routes: {
+        "/": (context) => const HomePage(),
+      },
     );
   }
 }
@@ -38,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.menu),
-            Container(
+            const Icon(Icons.menu),
+            SizedBox(
               height: 40,
               width: 40,
               child: ClipRRect(

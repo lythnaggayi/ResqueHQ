@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rescue_hq/widgets/homeappbar.dart';
 
 class Accordion extends StatefulWidget {
   const Accordion({Key? key}) : super(key: key);
@@ -11,13 +12,9 @@ class _AccordionState extends State<Accordion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ResqueHQ'),
-        backgroundColor: Colors.amberAccent,
-        centerTitle: true,
-      ),
-      body: Column(
+      body: ListView(
         children: [
+          const HomeAppBar(),
           const Padding(padding: EdgeInsets.all(10.0)),
           const Text(
             "Possible First Aid Options",

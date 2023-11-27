@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rescue_hq/pages/homepage.dart';
 import 'package:rescue_hq/pages/possible_first_aid.dart';
+import 'package:rescue_hq/pages/secondpage.dart';
+import 'package:rescue_hq/widgets/button.dart';
 import 'package:rescue_hq/widgets/homeappbar.dart';
+import 'package:rescue_hq/widgets/waveanimation.dart';
 
 class DatItem {
   String? id;
@@ -90,13 +93,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: const Color.fromARGB(141, 255, 255, 255),
                   child: Column(children: [
                     const HomeAppBar(),
-                    // searchBox(),
+                    SizedBox(height: 25),
+                    //searchbar
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 15,
                       ),
-                      height: 44,
-                      width: 620,
+                      height: 43,
+                      width: 273,
                       decoration: BoxDecoration(
                           color: Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
@@ -110,12 +114,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             prefixIcon: Icon(
                               Icons.search,
                               color: Colors.black,
-                              size: 25,
+                              size: 19,
                             ),
                             prefixIconConstraints:
                                 BoxConstraints(maxHeight: 20, minWidth: 25),
                             border: InputBorder.none,
-                            hintText: 'Search',
+                            // hintText: 'Search',
                             hintStyle: TextStyle(color: Colors.grey)),
                       ),
                     ),
@@ -124,11 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(top: 25, bottom: 20),
-                            child: const Text(
-                              'Speed dial a specific service ',
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w600),
+                            child: const Row(
+                              children: [],
                             ),
+                            // child: const Text(
+                            //   'Speed dial a specific service ',
+                            //   style: TextStyle(
+                            //       fontSize: 30, fontWeight: FontWeight.w600),
+                            // ),
                           ),
                           for (DatItem dataitem in _searchItem)
                             Hitem(
@@ -193,14 +200,6 @@ class _MyHomePageState extends State<MyHomePage> {
               size: 30.0,
             ),
           ),
-          // BottomNavigationBarItem(
-          //   label: 'First Aid',
-          //   icon: Icon(
-          //     Icons.local_hospital,
-          //     color: Colors.white,
-          //     size: 30.0,
-          //   ),
-          // )
         ],
         currentIndex: _currentIndex,
         onTap: (int index) {
@@ -220,11 +219,12 @@ class Hitem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 20),
           height: 53,
-          width: 350,
+          width: 300,
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.transparent,
@@ -248,10 +248,99 @@ class Hitem extends StatelessWidget {
                     // decoration: TextDecoration.lineThrough,
                     ),
               ),
+              trailing: Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(5)),
+                child: IconButton(
+                  color: Colors.black,
+                  iconSize: 18,
+                  icon: Icon(Icons.message_outlined),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MySecondPage()),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class MySecondPage extends StatelessWidget {
+  _sendMessageArea() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      height: 70,
+      color: Colors.amber,
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.photo),
+            iconSize: 25,
+            color: Colors.black,
+          ),
+          const Expanded(
+            child: TextField(
+              decoration: InputDecoration.collapsed(hintText: 'Send a message'),
+              textCapitalization: TextCapitalization.sentences,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.send),
+            iconSize: 25,
+            color: Colors.black,
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber,
+        title: const Text('Chat with an expert '),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(7),
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.80),
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text('Hello, what do you need help with ?'),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          _sendMessageArea(),
+        ],
+      ),
     );
   }
 }

@@ -40,9 +40,6 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(
         title: '',
       ),
-      //routes: {
-      //  "/": (context) => const HomePage(),
-      // },
     );
   }
 }
@@ -87,23 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color.fromARGB(141, 255, 255, 255),
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       const Icon(Icons.menu),
-      //       SizedBox(
-      //         height: 40,
-      //         width: 40,
-      //         child: ClipRRect(
-      //           borderRadius: BorderRadius.circular(20),
-      //           child: Image.asset('images/user.png'),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       body: Center(
           child: _currentIndex == 2
               ? Container(
@@ -160,27 +140,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   ]),
                 )
               : _currentIndex == 3
-                  ? Container(
-                      child: Column(
-                        children: [
-                          const Padding(padding: EdgeInsets.all(10.0)),
-                          const Text(
-                            "Possible First Aid Options",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          ExpansionTile(
-                            title: const Text('Leg or Arm Fracture'),
-                            children: const <Widget>[
-                              ListTile(
-                                title: Text(
-                                    "Stop any bleeding. Apply pressure to the wound with a sterile bandage, a clean cloth or a clean piece of clothing. \n\nImmobilize the injured area. Do not try to realign the bone or push a bone that's sticking out back in. If you've been trained in how to splint and professional help isn't readily available, apply a splint to the area above and below the fracture sites. Padding the splints can help reduce discomfort. \n\nApply ice packs to limit swelling and help relieve pain. Don't apply ice directly to the skin. Wrap the ice in a towel, piece of cloth or some other material. \n\nTreat for shock. If the person feels faint or is breathing in short, rapid breaths, lay the person down with the head slightly lower than the trunk and, if possible, elevate the legs."),
-                              ),
-                            ],
-                            onExpansionChanged: (bool expanded) {},
-                          ),
-                        ],
-                      ),
+                  ? Column(
+                      children: [
+                        const Padding(padding: EdgeInsets.all(10.0)),
+                        const Text(
+                          "Possible First Aid Options",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        ExpansionTile(
+                          title: const Text('Leg or Arm Fracture'),
+                          children: const <Widget>[
+                            ListTile(
+                              title: Text(
+                                  "Stop any bleeding. Apply pressure to the wound with a sterile bandage, a clean cloth or a clean piece of clothing. \n\nImmobilize the injured area. Do not try to realign the bone or push a bone that's sticking out back in. If you've been trained in how to splint and professional help isn't readily available, apply a splint to the area above and below the fracture sites. Padding the splints can help reduce discomfort. \n\nApply ice packs to limit swelling and help relieve pain. Don't apply ice directly to the skin. Wrap the ice in a towel, piece of cloth or some other material. \n\nTreat for shock. If the person feels faint or is breathing in short, rapid breaths, lay the person down with the head slightly lower than the trunk and, if possible, elevate the legs."),
+                            ),
+                          ],
+                          onExpansionChanged: (bool expanded) {},
+                        ),
+                      ],
                     )
                   : _currentIndex == 1
                       ? const Accordion() //first aid options page
@@ -237,14 +215,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Hitem extends StatelessWidget {
   final DatItem dataitem;
-  Hitem({Key? key, required this.dataitem}) : super(key: key);
+  const Hitem({Key? key, required this.dataitem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 20),
           height: 53,
           width: 350,
           child: Container(
